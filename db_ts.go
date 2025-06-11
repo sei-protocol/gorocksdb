@@ -10,6 +10,7 @@ package gorocksdb
 */
 import "C"
 import (
+	"errors"
 	"unsafe"
 )
 
@@ -67,4 +68,18 @@ func byteSliceToChar(b []byte) *C.char {
 		return nil
 	}
 	return (*C.char)(unsafe.Pointer(&b[0]))
+}
+
+// convertErr frees a rocksdb_status_t* and converts it to Go error
+func convertErr(st *C.rocksdb_status_t) error {
+	if st == nil {
+		return nil
+	}
+	defer C.rocksdb_status_destroy(st)
+
+	if C.rocksdb_status_code(st) == C.rocksdb_status_code_t(0) {
+		return nil
+	}
+	msg := C.GoString(C.rocksdb_status_to_string(st))
+	return errors.New(msg)
 }
