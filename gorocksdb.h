@@ -28,3 +28,18 @@ extern void gorocksdb_mergeoperator_delete_value(void* state, const char* v, siz
 /* Slice Transform */
 
 extern rocksdb_slicetransform_t* gorocksdb_slicetransform_create(uintptr_t idx);
+
+/* gorocksdb.h */
+extern rocksdb_status_t* gorocksdb_put_cf_with_ts(
+    rocksdb_t* db,
+    const rocksdb_writeoptions_t* options,
+    rocksdb_column_family_handle_t* cf,
+    const char* key, size_t keylen,
+    const char* ts,  size_t tslen,
+    const char* val, size_t vallen);
+
+extern rocksdb_status_t* gorocksdb_increase_full_history_ts_low(
+    rocksdb_t* db,
+    rocksdb_column_family_handle_t* cf,
+    const char* ts, size_t tslen);
+

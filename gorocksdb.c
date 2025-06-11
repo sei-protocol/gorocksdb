@@ -68,3 +68,22 @@ rocksdb_slicetransform_t* gorocksdb_slicetransform_create(uintptr_t idx) {
     	(unsigned char (*)(void*, const char*, size_t))(gorocksdb_slicetransform_in_range),
     	(const char* (*)(void*))(gorocksdb_slicetransform_name));
 }
+
+/* gorocksdb.c */
+rocksdb_status_t* gorocksdb_put_cf_with_ts(
+    rocksdb_t* db,
+    const rocksdb_writeoptions_t* options,
+    rocksdb_column_family_handle_t* cf,
+    const char* key, size_t keylen,
+    const char* ts,  size_t tslen,
+    const char* val, size_t vallen) {
+    return rocksdb_put_cf_with_ts(db, options, cf, key, keylen, ts, tslen, val, vallen);
+}
+
+rocksdb_status_t* gorocksdb_increase_full_history_ts_low(
+    rocksdb_t* db,
+    rocksdb_column_family_handle_t* cf,
+    const char* ts, size_t tslen) {
+    return rocksdb_increase_full_history_ts_low(db, cf, ts, tslen);
+}
+
