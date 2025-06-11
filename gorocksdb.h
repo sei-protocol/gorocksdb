@@ -43,3 +43,9 @@ extern rocksdb_status_t* gorocksdb_increase_full_history_ts_low(
     rocksdb_column_family_handle_t* cf,
     const char* ts, size_t tslen);
 
+extern rocksdb_status_t* gorocksdb_delete_cf_with_ts(
+    rocksdb_t*, const rocksdb_writeoptions_t*,
+    rocksdb_column_family_handle_t*,
+    const char* key, size_t keylen,
+    const char* ts,  size_t tslen);
+

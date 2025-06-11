@@ -1,6 +1,3 @@
-// column_family_ts.go
-//
-// Build only when RocksDB was compiled with USE_USER_DEFINED_TIMESTAMP=1.
 //go:build rocksdb_user_timestamp
 // +build rocksdb_user_timestamp
 

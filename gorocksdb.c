@@ -87,3 +87,11 @@ rocksdb_status_t* gorocksdb_increase_full_history_ts_low(
     return rocksdb_increase_full_history_ts_low(db, cf, ts, tslen);
 }
 
+rocksdb_status_t* gorocksdb_delete_cf_with_ts(
+    rocksdb_t* db,
+    const rocksdb_writeoptions_t* options,
+    rocksdb_column_family_handle_t* cf,
+    const char* key, size_t keylen,
+    const char* ts,  size_t tslen) {
+    return rocksdb_delete_cf_with_ts(db, options, cf, key, keylen, ts, tslen);
+}
