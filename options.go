@@ -528,7 +528,7 @@ func (opts *Options) SetMaxBytesForLevelMultiplier(value float64) {
 	C.rocksdb_options_set_max_bytes_for_level_multiplier(opts.c, C.double(value))
 }
 
-// SetLevelCompactiondynamiclevelbytes specifies whether to pick
+// SetLevelCompactionDynamiclevelbytes specifies whether to pick
 // target size of each level dynamically.
 //
 // We will pick a base level b >= 1. L0 will be directly merged into level b,
@@ -1054,33 +1054,6 @@ func (opts *Options) SetHashSkipListRep(bucketCount int, skiplistHeight, skiplis
 // bucketCount: number of fixed array buckets
 func (opts *Options) SetHashLinkListRep(bucketCount int) {
 	C.rocksdb_options_set_hash_link_list_rep(opts.c, C.size_t(bucketCount))
-}
-
-// SetPlainTableFactory sets a plain table factory with prefix-only seek.
-//
-// For this factory, you need to set prefix_extractor properly to make it
-// work. Look-up will starts with prefix hash lookup for key prefix. Inside the
-// hash bucket found, a binary search is executed for hash conflicts. Finally,
-// a linear search is used.
-//
-// keyLen: 			plain table has optimization for fix-sized keys,
-//
-//	which can be specified via keyLen.
-//
-// bloomBitsPerKey: the number of bits used for bloom filer per prefix. You
-//
-//	may disable it by passing a zero.
-//
-// hashTableRatio:  the desired utilization of the hash table used for prefix
-//
-//	hashing. hashTableRatio = number of prefixes / #buckets
-//	in the hash table
-//
-// indexSparseness: inside each prefix, need to build one index record for how
-//
-//	many keys for binary search inside each hash bucket.
-func (opts *Options) SetPlainTableFactory(keyLen uint32, bloomBitsPerKey int, hashTableRatio float64, indexSparseness int) {
-	C.rocksdb_options_set_plain_table_factory(opts.c, C.uint32_t(keyLen), C.int(bloomBitsPerKey), C.double(hashTableRatio), C.size_t(indexSparseness))
 }
 
 // SetCreateIfMissingColumnFamilies specifies whether the column families
